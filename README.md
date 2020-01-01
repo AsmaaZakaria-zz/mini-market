@@ -1,4 +1,4 @@
-# Picnic assignment
+# Mini Market
 
 ## Tools:
 
