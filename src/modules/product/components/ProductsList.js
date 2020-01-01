@@ -1,66 +1,97 @@
 import React from "react";
-// import axios from "axios";
 import { connect } from "react-redux";
-// import { fetchProducts } from "../actions/fetchProducts";
-import ProductCard from "./ProductsList";
+import styled from "styled-components";
+import Logo from "../../../logo.jpeg";
+import ProductCard from "./ProductCard";
+import Loader from "../../../components/Loader";
+import NotFound from "../../../components/NotFound";
+import SearchField from "../../../components/SearchField";
+import { fetchProducts } from "../actions/fetchProducts";
+
+const Container = styled.div`
+    width: 85%;
+    margin: auto;
+`;
+
+const HeaderContainer = styled.div`
+    text-align: center;
+`;
+
+const Header = styled.h1`
+    text-align: center;
+    font-size: 4rem;
+    color: #d77fa1;
+    font-weight: 700;
+    font-style: normal;
+    font-family: "PT Sans", sans-serif;
+    color: #604848;
+    font-size: 44px;
+    line-height: 1.1;
+    letter-spacing: 0px;
+`;
+
+const HR = styled.hr`
+    max-width: 100%;
+    width: 190px;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #e1e1e1;
+`;
+
+const LogoContainer = styled.img`
+    height: 100%;
+    max-height: 345px;
+`;
 
 const mapStateToProps = (state) => {
-  return {}
-}
+    return {
+        products: state.products.filterProducts,
+    };
+};
 
 const mapDispatchToProps = {
-  // fetchProducts
-}
+    fetchProducts,
+};
 
 class ProductsList extends React.Component {
-  state = {
-    todos: [
-      {
-        "product_id" : "1",
-        "name" : "Apples",
-        "price" : 120,
-        // "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/1.jpg"
-     },
-     {
-        "product_id" : "2",
-        "name" : "Oranges",
-        "price" : 167,
-        // "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/2.jpg"
-     },
-     {
-        "product_id" : "3",
-        "name" : "Bananas",
-        "price" : 88,
-        // "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/3.jpg"
-     },
-     {
-        "product_id" : "4",
-        "name" : "Onions",
-        "price" : 110,
-        // "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/4.jpg"
-     },
-     {
-        "product_id" : "5",
-        "name" : "Steak",
-        "price" : 543,
-        // "image" : "https://s3-eu-west-1.amazonaws.com/developer-application-test/images/5.jpg"
-     },
-    ]
-  }
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
 
-  render() {
-    return (
-      <div>
-        ProductsList
-        {this.state.todos.map(product => (
-          <ProductCard name={product.name} />
-        ))}
-      </div>
-    )
-  }
+    renderProductList = () => {
+        if (!this.props.products) {
+            return <Loader />;
+        }
+
+        if (this.props.products.length === 0) {
+            return <NotFound />;
+        }
+
+        return this.props.products.map((product) => (
+            <ProductCard key={product.product_id} product={product} />
+        ));
+    };
+
+    render() {
+        return (
+            <section>
+                <Container>
+                    <LogoContainer src={Logo} alt="Logo" />
+                    <HeaderContainer>
+                        <Header>Our Products</Header>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Donec metus nulla, varius sit amet suscipit sed,
+                            vulputate eu diam
+                        </p>
+                    </HeaderContainer>
+                    <HR />
+                    <SearchField />
+                    <main>{this.renderProductList()}</main>
+                </Container>
+            </section>
+        );
+    }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductsList);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductsList);

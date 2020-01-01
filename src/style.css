@@ -1,0 +1,135 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: serif;
+}
+
+section {
+    padding: 70px 0;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-gap: 15px;
+    margin: 0 15px;
+}
+
+img {
+    width: 98%;
+    height: 70%;
+    border-radius: 12px;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.5s;
+    border-radius: 5px;
+    padding: 7px;
+    font-family: "PT Sans", sans-serif;
+    color: #ffffff;
+    background-color: #e1d79a;
+}
+
+.name {
+    font-size: 25px;
+    color: #84c64b;
+}
+.price {
+    color: #d75e72;
+    font-size: 25px;
+    letter-spacing: -2px;
+}
+.description {
+    font-size: 25px;
+}
+
+/* Product Card */
+.card {
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+    text-align: center;
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px #ccc;
+    transition: all 0.5s;
+    border-radius: 10px;
+}
+.card:hover img {
+    border: 2px solid #e1d79a;
+    cursor: pointer;
+}
+.card-content {
+    position: absolute;
+    left: 0px;
+    bottom: -23px;
+    width: 100%;
+    color: #000;
+    line-height: 10px;
+}
+.card:hover .card-content {
+    bottom: 10px;
+    transition: all 0.5s;
+}
+
+/* modal */
+.modal {
+    position: fixed;
+    right: 15px;
+    top: 15px;
+    border: none;
+    font-size: 20px;
+}
+.modal-body {
+    position: fixed;
+    background: #e1d79a;
+    width: 30%;
+    border-radius: 20px;
+    text-align: center;
+    height: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.modal-body img {
+    margin: 5px 1px 0 0;
+}
+.modal-close {
+    position: fixed;
+    right: 25px;
+    top: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 599px) {
+    main {
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+    img {
+        height: 50%;
+    }
+    .description {
+        font-size: 18px;
+    }
+    .card {
+        height: 215px;
+    }
+    .card-content {
+        bottom: -10px;
+    }
+    .card-content a {
+        display: none;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 992px) {
+    main {
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+}
