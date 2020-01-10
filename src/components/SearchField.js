@@ -24,7 +24,6 @@ const Input = styled.input`
 
 const mapStateToProps = (state) => {
     return {
-        name: state.products.name,
         products: state.products.products,
     };
 };
@@ -40,7 +39,6 @@ const SearchField = (props) => {
                 name="search"
                 placeholder="Search..."
                 autoComplete="off"
-                value={props.name}
                 onChange={(e) =>
                     props.searchProducts(props.products, e.target.value)
                 }
