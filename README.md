@@ -11,7 +11,7 @@
 ## Start Project
 
 -   download/clone the project
--   \$ cd picnic-assignment
+-   \$ cd mini-market
 -   \$ yarn && yarn start
 -   open url: localhost:3000
 
